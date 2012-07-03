@@ -9,8 +9,11 @@ public class InsertionSort_jdb implements Sort {
 
     private double[] numbers;
 
-    public InsertionSort_jdb(double[] a)
+    public InsertionSort_jdb()
     {
+    }
+
+    public void setData (double[] a)  {
         numbers = a;
     }
 

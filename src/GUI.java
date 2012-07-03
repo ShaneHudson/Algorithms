@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.border.MatteBorder;
 
 public class GUI {
@@ -22,7 +23,8 @@ public class GUI {
         frame = new JFrame("Algorithms");
         pane = frame.getContentPane();
         frame.setSize(500,500);
-        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -35,16 +37,18 @@ public class GUI {
         c.fill = GridBagConstraints.VERTICAL;
         pane.add(scrollPane, c);
 
-        JTextArea result = new JTextArea(25, 25);
+        final JTextArea result = new JTextArea(25, 25);
         result.setEditable(false);
         result.setBorder(BorderFactory.createMatteBorder(0,1,0,0, Color.lightGray));
+        result.setLineWrap(true);
+        result.setMargin(new Insets(10, 10, 10, 10));
+        final JScrollPane resultScrollPane = new JScrollPane(result);
         c.fill = GridBagConstraints.VERTICAL;
-        pane.add(result, c);
+        pane.add(resultScrollPane, c);
 
 
         String[] algorithms =
                 {   "Insertion Sort - jdb",
-                        "Insertion Sort - Shane Hudson",
                         "Quick Sort - Shane Hudson",
                         "Quick Sort - jdb",
                         "Quick Sort - Blackcompe"
@@ -63,6 +67,7 @@ public class GUI {
                 logic.setData(data.getText());
                 logic.setAlgorithm(algoList.getSelectedItem().toString());
                 logic.start();
+                result.setText(result.getText() + Arrays.toString(logic.getSorted()) + "\n");
             }
         });
         pane.add(btnStart, c);

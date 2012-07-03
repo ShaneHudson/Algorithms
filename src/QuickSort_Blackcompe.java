@@ -5,7 +5,11 @@ public class QuickSort_Blackcompe implements Sort {
     private Random rand;
     private double[] numbers;
 
-    public QuickSort_Blackcompe(double[] list)
+    public QuickSort_Blackcompe()
+    {
+    }
+
+    public void setData(double[] list)
     {
         rand = new Random();
         numbers = list;

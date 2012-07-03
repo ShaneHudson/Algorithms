@@ -1,6 +1,6 @@
-import java.io.Console;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,34 +14,27 @@ public class Logic {
     private long startTime = 0;
     private long stopTime = 0;
     private boolean running = false;
+    
+    private double[] sortedList = {5, 3, 2, 3};
+    
+    private String data;
+    private Sort algorithm;
 
 
     private Random rand;
 
     public Logic()  {
 
-        double[] list;
-
-        rand = new Random();
-        //list = new int[]{9, 34, 344342, 3432, 3,3,3,32,231, 3, 2, 4};
-        list = new double[100000];
-        for (int i = 0; i < 100000; i++)
-        {
-            list[i] = rand.nextDouble() * 10000;
-        }
-        System.out.println(Arrays.toString(list));
-        Sort sort = new QuickSort(list);
-        start();
-        sort.sort();
-        list = sort.getNumbers();
-        stop();
-        System.out.println(Arrays.toString(list));
-        System.out.println(getElapsedTime() + " nanoseconds");
     }
 
     public void start() {
+        Sort sort = algorithm;
+        sortedList = parseData(data);
+        sort.setData(sortedList);
         this.startTime = System.nanoTime();
         this.running = true;
+        sort.sort();
+        sortedList = sort.getNumbers();
     }
 
 
@@ -64,11 +57,46 @@ public class Logic {
 
     public void setData(String data)
     {
-        System.out.println(data);
+        this.data = data;
+    }
+    
+    private double[] parseData(String data)
+    {
+        int count = 0;
+        StringTokenizer st = new StringTokenizer(data, ",");
+        double[] result = new double[st.countTokens()];
+        while(st.hasMoreTokens())
+        {
+            result[count] = Double.parseDouble(st.nextToken());
+            count++;
+        }
+        return result;
+    }
+    
+    public double[] getSorted()
+    {
+        return sortedList;
     }
     
     public void setAlgorithm(String algorithm)
     {
-        System.out.println(algorithm);
+        switch(algorithm)
+        {
+            case "Insertion Sort - jdb":
+                this.algorithm = new InsertionSort_jdb();
+                break;
+            //case "Insertion Sort - Shane Hudson":
+            //    this.algorithm = new InsertionSort();
+            //    break;
+            case "Quick Sort - Shane Hudson":
+                this.algorithm = new QuickSort();
+                break;
+            case "Quick Sort - jdb":
+                this.algorithm = new QuickSort_jdb();
+                break;
+            case "Quick Sort - Blackcompe":
+                this.algorithm = new QuickSort_Blackcompe();
+                break;
+        }
     }
 }

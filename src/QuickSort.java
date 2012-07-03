@@ -6,7 +6,11 @@ public class QuickSort implements Sort {
     private Random rand;
     private double[] numbers;
 
-    public QuickSort(double[] list)
+    public QuickSort()
+    {
+    }
+
+    public void setData(double[] list)
     {
         rand = new Random();
         numbers = list;

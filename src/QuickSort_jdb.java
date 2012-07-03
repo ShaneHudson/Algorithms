@@ -11,7 +11,11 @@ public class QuickSort_jdb implements Sort {
 
     private double[] numbers;
     
-    public QuickSort_jdb(double[] a)
+    public QuickSort_jdb()
+    {
+    }
+
+    public void setData (double[] a)
     {
         numbers = a;
     }

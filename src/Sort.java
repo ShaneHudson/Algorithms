@@ -7,4 +7,8 @@
  */
 public interface Sort extends Algorithm {
     public abstract void sort();
+
+    public abstract void setData(double[] list);
+
+    public double[] getNumbers();
 }
